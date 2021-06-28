@@ -107,6 +107,8 @@ Password : password
 
 SBAdmin 2
 
+Check https://github.com/davidpramana/laravel8-sbadmin2
+
 ## Provision.sh
 
 This is the default ``provision.sh``
