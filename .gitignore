@@ -1,8 +1,11 @@
 # User Provision
-.provision.sh
+provision.sh
 
 # General
 .vagrant/
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 *.log
+
+# Sites Available
+sites-available/laravel.conf

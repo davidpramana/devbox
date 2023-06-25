@@ -13,8 +13,18 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   # config.vm.box = "ubuntu/bionic64"
-  config.vm.box = "ubuntu/focal64"
-  config.vm.hostname = "ygdevbox"
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.hostname = "devbox"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+  end
+
+  # VirtualBox Guest Additions
+  # vagrant plugin install vagrant-vbguest
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

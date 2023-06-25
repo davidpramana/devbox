@@ -2,14 +2,14 @@
 
 | Category           | Name   |
 | ------------------ | ------ |
-| Operating System   | Linux Ubuntu Server 20.04 64 bit Long Term Support |
+| Operating System   | Linux Ubuntu Server 22.04 64 bit Long Term Support |
 | Web Server   | Nginx 1.18.0   |
-| Programming Language   | PHP 7.3.X or 8.0 (default)	|
+| Programming Language   | PHP 8.2	|
 | Relational Database   | PostgreSQL 10.12   |
 | Relational Database Alternative   | MySQL 8.0.19   |
 | HTTP Cache        | Varnish 6.0 |
 | In-memory Database   | Redis 6.0.6   |
-| Javascript Runtime Environment   | NodeJS 14.15.4   |
+| Javascript Runtime Environment   | NodeJS 18.X   |
 | Javascript Package Manager   | NPM 6.14.10   |
 | Version Control System   | Git 2.25.1   |
 | PHP Dependency Manager   | Composer latest   |

@@ -63,7 +63,7 @@ common_go() {
 }
 
 npm_go() {
-	curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+	curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 	apt-get -y install nodejs
 	npm install -g gulp-cli gulp pm2 cross-env
 }
@@ -106,7 +106,7 @@ php_go() {
 	#apt-get install -y php7.3 php7.3-bcmath php7.3-bz2 php7.3-cgi php7.3-cli php7.3-common php7.3-curl php7.3-dba php7.3-enchant php7.3-fpm php7.3-gd php7.3-gmp php7.3-imap php7.3-interbase php7.3-intl php7.3-json php7.3-ldap php7.3-mbstring php7.3-mysql php7.3-odbc php7.3-opcache php7.3-pgsql php7.3-phpdbg php7.3-pspell php7.3-readline php7.3-recode php7.3-snmp php7.3-soap php7.3-sqlite3 php7.3-sybase php7.3-tidy php7.3-xml php7.3-xmlrpc php7.3-xsl php7.3-zip php7.3-redis
 
 	# Install PHP 8
-	apt-get install -y php8.0 php8.0-bcmath php8.0-bz2 php8.0-cgi php8.0-cli php8.0-common php8.0-curl php8.0-dba php8.0-enchant php8.0-fpm php8.0-gd php8.0-gmp php8.0-imap php8.0-interbase php8.0-intl php8.0-ldap php8.0-mbstring php8.0-mysql php8.0-odbc php8.0-opcache php8.0-pgsql php8.0-phpdbg php8.0-pspell php8.0-readline php8.0-snmp php8.0-soap php8.0-sqlite3 php8.0-sybase php8.0-tidy php8.0-xml php8.0-xmlrpc php8.0-xsl php8.0-zip php8.0-redis
+	apt-get install -y php8.2 php8.2-bcmath php8.2-bz2 php8.2-cgi php8.2-cli php8.2-common php8.2-curl php8.2-dba php8.2-enchant php8.2-fpm php8.2-gd php8.2-gmp php8.2-imap php8.2-interbase php8.2-intl php8.2-ldap php8.2-mbstring php8.2-mysql php8.2-odbc php8.2-opcache php8.2-pgsql php8.2-phpdbg php8.2-pspell php8.2-readline php8.2-snmp php8.2-soap php8.2-sqlite3 php8.2-sybase php8.2-tidy php8.2-xml php8.2-xmlrpc php8.2-xsl php8.2-zip php8.2-redis
 
 	nginx_handler
 }
@@ -123,7 +123,7 @@ redis_go() {
 
 	# Install as Service
 	sed -i "s/supervised no/supervised systemd/g" /etc/redis/redis.conf
-	redis_handler
+	service redis-server restart
 }
 
 codeception_go() {
@@ -178,7 +178,7 @@ postgresql_go() {
 	service postgresql start
 
 	# create default user
-	sudo -u postgres bash -c "psql -c \"create user yogya with password 'secret' CREATEDB;\""
+	sudo -u postgres bash -c "psql -c \"create user devbox with password 'secret' CREATEDB;\""
 
 	# PostgreSQL Handler
 	postgresql_handler
@@ -198,7 +198,7 @@ mysql_go() {
 
 oci8_go() {
 	# install OCI8
-	apt-get -y install libaio1 build-essential php-pear php8.0-dev
+	apt-get -y install libaio1 build-essential php-pear php8.2-dev
 
 	# Set executable
 	chmod +x *.deb
@@ -283,7 +283,7 @@ complete_go() {
 
 nginx_handler() {
 	service nginx restart
-	service php8.0-fpm restart
+	service php8.2-fpm restart
 }
 
 varnish_handler() {
@@ -292,10 +292,6 @@ varnish_handler() {
 
 postgresql_handler() {
 	service postgresql restart
-}
-
-redis_handler() {
-	service redis-server restart
 }
 
 main
