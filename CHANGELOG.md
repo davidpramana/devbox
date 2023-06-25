@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.6.0
+
+- MODIFIED; OS to Ubuntu 22.04 LTS (Jammy)
+- MODIFIED; PHP 8.0 to 8.2
+- MODIFIED; NodeJS 14 to 18
+- MODIFIED; README.md for current technology stack & version
+- ADDED; Support for VirtualBox Guest Additions plugin disable auto update
+- ADDED; Connect using cable for network
+
 ## 0.5.0
 
 - MODIFIED; OS to Ubuntu 20.04 LTS (Focal)
