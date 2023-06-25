@@ -39,7 +39,7 @@ Then, you will have to let vagrant reload and run provisioning process again.
 
 You have default PostgreSQL use as follow:
 
-* Username : yogya
+* Username : devbox
 * Password : secret
 
 You have default MySQL use as follow:
@@ -81,7 +81,7 @@ nano .env
 	DB_CONNECTION=pgsql
 	DB_PORT=5432
 	DB_DATABASE=laravel
-	DB_USERNAME=yogya
+	DB_USERNAME=devbox
 	DB_PASSWORD=secret
 
 	CACHE_DRIVER=redis
