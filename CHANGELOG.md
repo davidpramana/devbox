@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.1
+
+- MODIFIED; OS Ubuntu 22.04 to 20.04 LTS (Focal)
+
 ## 0.6.0
 
 - MODIFIED; OS to Ubuntu 22.04 LTS (Jammy)

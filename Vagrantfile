@@ -12,8 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/bionic64"
-  config.vm.box = "ubuntu/jammy64"
+  config.vm.box = "ubuntu/focal64"
   config.vm.hostname = "devbox"
 
   config.vm.provider "virtualbox" do |vb|
@@ -29,12 +28,12 @@ Vagrant.configure(2) do |config|
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+  config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 5432, host: 5433
+  config.vm.network "forwarded_port", guest: 5432, host: 5433
   # config.vm.network "forwarded_port", guest: 3306, host: 3307
 
   # Create a private network, which allows host-only access to the machine
@@ -57,13 +56,12 @@ Vagrant.configure(2) do |config|
   # Windows
   config.vm.synced_folder "../Code", "/home/vagrant/Code"
 
-
   # Copy files
   # config.vm.provision "file", source: "./files/oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb", destination: "./oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb"
   # config.vm.provision "file", source: "./files/oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb", destination: "./oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb"
   config.vm.provision "file", source: "./templates/varnish", destination: "./varnish"
   config.vm.provision "file", source: "./templates/varnish.service", destination: "./varnish.service"
-
+  config.vm.provision "file", source: "./templates/varnish.vcl", destination: "./varnish.vcl"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.

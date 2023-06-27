@@ -213,21 +213,21 @@ oci8_go() {
 	yes 'instantclient,/usr/lib/oracle/12.1/client64/lib' | pecl install oci8 || true
 
 	# add oci8 extension to php.ini (CLI)
-	if grep -Fxq "extension=oci8.so" /etc/php/8.0/cli/php.ini; then
+	if grep -Fxq "extension=oci8.so" /etc/php/8.2/cli/php.ini; then
 		# code if found : ignore
 		echo 'extension oci8 already exists in cli'
 	else
 		# code if not found : append file
-		echo 'extension=oci8.so' >> /etc/php/8.0/cli/php.ini
+		echo 'extension=oci8.so' >> /etc/php/8.2/cli/php.ini
 	fi
 
 	# add oci8 extension to php.ini (FPM)
-	if grep -Fxq "extension=oci8.so" /etc/php/8.0/fpm/php.ini; then
+	if grep -Fxq "extension=oci8.so" /etc/php/8.2/fpm/php.ini; then
 		# code if found : ignore
 		echo 'extension oci8 already exists in fpm'
 	else
 		# code if not found : append file
-		echo 'extension=oci8.so' >> /etc/php/8.0/fpm/php.ini
+		echo 'extension=oci8.so' >> /etc/php/8.2/fpm/php.ini
 	fi
 }
 
@@ -247,9 +247,17 @@ varnish_go() {
 	# Modify Varnish port
 	cp -f ./varnish /etc/default/varnish
 
+	# Modify Varnish VCL
+	cp -f ./varnish.vcl /etc/varnish/default.vcl
+
 	# Modify Varnish service
 	cp -f ./varnish.service /lib/systemd/system/varnish.service
 	systemctl daemon-reload
+
+	# Remove Varnish File Templates
+	rm /home/vagrant/varnish
+	rm /home/vagrant/varnish.service
+	rm /home/vagrant/varnish.vcl
 
 	# Ensure Varnish is started
 	varnish_handler
@@ -270,10 +278,6 @@ complete_go() {
 
 	# Ensure Varnish is started
 	varnish_handler
-
-	# Remove Varnish File Templates
-	rm /home/vagrant/varnish
-	rm /home/vagrant/varnish.service
 
 	# Change .config folder ownership
 	chown -R vagrant:vagrant /home/vagrant/.config

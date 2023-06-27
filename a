@@ -1,0 +1,53 @@
+[33mcommit 4504613db4e2ffd97fc001f993633e4a1dda94e0[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: David Pramana <davidpramana@gmail.com>
+Date:   Sun Jun 25 22:04:50 2023 +0700
+
+    Update 0.6.0 Changelog
+
+[33mcommit 1684b12a12fa599e258912b2d30857cf77217636[m
+Author: David Pramana <davidpramana@gmail.com>
+Date:   Sun Jun 25 22:01:30 2023 +0700
+
+    Update PostgreSQL username
+
+[33mcommit 9af733ac79b9f07dadba58ebcf25d9363842497c[m
+Author: David Pramana <davidpramana@gmail.com>
+Date:   Sun Jun 25 21:58:55 2023 +0700
+
+    Upgrade to Ubuntu 22.04, NodeJS 18, and PHP 8.2
+
+[33mcommit 53a29413ff27f219598b215a1e8ac671ee1cc408[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:47:16 2021 +0100
+
+    Add Laravel8-SBAdmin2 Link to README
+
+[33mcommit 8dba988bbd12b9093b697eba6f0f76d7502ed120[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:45:37 2021 +0100
+
+    Removed .vagrant folder from git
+
+[33mcommit a30d699fa49c730c3ccef4352875bad5769fb3b2[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:35:44 2021 +0100
+
+    Remove .vagrant and logs from repository
+
+[33mcommit 2ff43cbe9264b01d41e543777b076a0051a2318e[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:33:39 2021 +0100
+
+    Remove .vagrant from repository
+
+[33mcommit e3d9de1f214827e8cdba789dd9f109b79d11dcdc[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:32:06 2021 +0100
+
+    Remove .vagrant from repository
+
+[33mcommit 86ae75aa3d9bc3698161abdcb5eba2d02f5a19a4[m
+Author: David Pramana <david.pramana@yogyagroup.com>
+Date:   Mon Jun 28 06:29:41 2021 +0100
+
+    Jun 2021
