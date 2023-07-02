@@ -6,7 +6,7 @@
 | Web Server   | Nginx 1.18.0   |
 | Programming Language   | PHP 8.2.7	|
 | Relational Database   | PostgreSQL 10.12   |
-| Relational Database Alternative   | MySQL 8.0.19   |
+| Relational Database Alternative   | MySQL 8.0.33   |
 | HTTP Cache        | Varnish 6.2.1 |
 | In-memory Database   | Redis 6.0.6   |
 | Javascript Runtime Environment   | NodeJS 18.16.1   |
@@ -154,9 +154,30 @@ main() {
 	# mysql_go
 	# oci8_go
 	# varnish_go
-	# autoremove_go
-	# complete_go
+	autoremove_go
+	complete_go
 }
 ```
 
 Basically only set nginx for daily development.
+
+## Vagrant VirtualBox Guess Addition
+
+Jika menemukan warning seperti ini:
+
+```
+The guest additions on this VM do not match the installed version of
+VirtualBox! In most cases this is fine, but in rare cases it can
+shared folder errors, please make sure the guest additions within the
+virtual machine match the version of VirtualBox you have installed on
+your host and reload your VM.
+
+Guest Additions Version: 6.1.38
+VirtualBox Version: 7.0
+```
+
+Maka eksekusi command berikut:
+
+```
+vagrant vbguest --auto-reboot --no-provision
+```

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.6.2
+
+- MODIFIED; OS Ubuntu 20.04 to 22.04 LTS (Jammy)
+- ADDED; Custom PHP-FPM Config
+- ADDED; MySQL Tuner Perl Script
+- MODIFIED; Redis PPA to Official RedisLab
+- MODIFIED; PostgreSQL 10 to 15
+
 ## 0.6.1
 
 - MODIFIED; OS Ubuntu 22.04 to 20.04 LTS (Focal)

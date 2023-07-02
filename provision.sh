@@ -16,8 +16,8 @@ main() {
 	# mysql_go
 	# oci8_go
 	# varnish_go
-	# autoremove_go
-	# complete_go
+	autoremove_go
+	complete_go
 }
 
 # GO MODULES
@@ -102,18 +102,22 @@ php_go() {
 	# Update Repository
 	apt-get update
 
-	# Install PHP 7
-	#apt-get install -y php7.3 php7.3-bcmath php7.3-bz2 php7.3-cgi php7.3-cli php7.3-common php7.3-curl php7.3-dba php7.3-enchant php7.3-fpm php7.3-gd php7.3-gmp php7.3-imap php7.3-interbase php7.3-intl php7.3-json php7.3-ldap php7.3-mbstring php7.3-mysql php7.3-odbc php7.3-opcache php7.3-pgsql php7.3-phpdbg php7.3-pspell php7.3-readline php7.3-recode php7.3-snmp php7.3-soap php7.3-sqlite3 php7.3-sybase php7.3-tidy php7.3-xml php7.3-xmlrpc php7.3-xsl php7.3-zip php7.3-redis
-
 	# Install PHP 8
 	apt-get install -y php8.2 php8.2-bcmath php8.2-bz2 php8.2-cgi php8.2-cli php8.2-common php8.2-curl php8.2-dba php8.2-enchant php8.2-fpm php8.2-gd php8.2-gmp php8.2-imap php8.2-interbase php8.2-intl php8.2-ldap php8.2-mbstring php8.2-mysql php8.2-odbc php8.2-opcache php8.2-pgsql php8.2-phpdbg php8.2-pspell php8.2-readline php8.2-snmp php8.2-soap php8.2-sqlite3 php8.2-sybase php8.2-tidy php8.2-xml php8.2-xmlrpc php8.2-xsl php8.2-zip php8.2-redis
+
+	# Modify PHP FPM Config
+	sed -i -e "s/pm = dynamic/pm = static/g" /etc/php/8.2/fpm/pool.d/www.conf
+	sed -i -e "s/pm.max_children = 5/pm.max_children = 44/g" /etc/php/8.2/fpm/pool.d/www.conf
+	sed -i -e "s/pm.start_servers = 2/pm.start_servers = 11/g" /etc/php/8.2/fpm/pool.d/www.conf
+	sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 11/g" /etc/php/8.2/fpm/pool.d/www.conf
+	sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 33/g" /etc/php/8.2/fpm/pool.d/www.conf
 
 	nginx_handler
 }
 
 redis_go() {
 	# Add Redis PPA
-	add-apt-repository ppa:chris-lea/redis-server
+	add-apt-repository ppa:redislabs/redis
 
 	# Update Repository
 	apt-get update
@@ -159,26 +163,32 @@ postgresql_go() {
 	wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O- | sudo apt-key add -
 
 	# Add the repository to the apt sources
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list
 
 	# Update apt
 	apt-get update
 
 	# Install PostgreSQL
-	apt-get -y install postgresql-10 #python-psycopg2
+	apt-get -y install postgresql-15 #python-psycopg2
 
 	# create pg cluster
-	pg_createcluster 10 main --start
+	pg_createcluster 15 main --start
 
 	# Allow access from Host
-	echo "host all all all password" >> /etc/postgresql/10/main/pg_hba.conf
-	sed -i -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/10/main/postgresql.conf
+	echo "host all all all password" >> /etc/postgresql/15/main/pg_hba.conf
+	sed -i -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/15/main/postgresql.conf
 
 	# run
 	service postgresql start
 
 	# create default user
 	sudo -u postgres bash -c "psql -c \"create user devbox with password 'secret' CREATEDB;\""
+
+	# Add Custom PostgreSQL Config
+	cp -f ./postgresql-custom.conf /etc/postgresql/15/main/conf.d/custom.conf
+
+	# Remove PostgreSQL Custom Config Templates
+	rm /home/vagrant/postgresql-custom.conf
 
 	# PostgreSQL Handler
 	postgresql_handler
@@ -191,6 +201,12 @@ mysql_go() {
 
 	# Install MySQL
 	apt-get -y install mysql-server
+
+	# Download MySQL Tuner
+	wget http://mysqltuner.pl/ -O /home/vagrant/mysqltuner.pl
+	wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/basic_passwords.txt -O basic_passwords.txt
+	wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv -O vulnerabilities.csv
+	chmod +x /home/vagrant/mysqltuner.pl
 
 	# run
 	service mysql start
@@ -281,6 +297,17 @@ complete_go() {
 
 	# Change .config folder ownership
 	chown -R vagrant:vagrant /home/vagrant/.config
+
+	# Add Vagrant to www-data Nginx
+	usermod -a -G www-data vagrant
+
+	# Remove Varnish File Templates
+	rm /home/vagrant/varnish
+	rm /home/vagrant/varnish.service
+	rm /home/vagrant/varnish.vcl
+
+	# Remove PostgreSQL Custom Config Templates
+	rm /home/vagrant/postgresql-custom.conf
 }
 
 # HANDLER

@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/focal64"
+  config.vm.box = "ubuntu/jammy64"
   config.vm.hostname = "devbox"
 
   config.vm.provider "virtualbox" do |vb|
@@ -62,6 +62,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "./templates/varnish", destination: "./varnish"
   config.vm.provision "file", source: "./templates/varnish.service", destination: "./varnish.service"
   config.vm.provision "file", source: "./templates/varnish.vcl", destination: "./varnish.vcl"
+  config.vm.provision "file", source: "./templates/postgresql-custom.conf", destination: "./postgresql-custom.conf"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
